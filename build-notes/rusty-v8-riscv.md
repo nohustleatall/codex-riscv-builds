@@ -2,7 +2,7 @@
 
 Codex code mode depends on the Rust `v8` crate, which expects a matching `rusty_v8` static archive and generated source binding for the target architecture.
 
-For the current Codex 0.125.0 build, the relevant `v8` crate version is:
+For the current Codex 0.128.0 build, the relevant `v8` crate version is:
 
 ```text
 146.4.0

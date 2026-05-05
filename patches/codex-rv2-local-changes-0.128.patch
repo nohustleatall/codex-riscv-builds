@@ -1,0 +1,47 @@
+diff --git a/codex-rs/core/Cargo.toml b/codex-rs/core/Cargo.toml
+index 44c6aacac5..bb2a3984c6 100644
+--- a/codex-rs/core/Cargo.toml
++++ b/codex-rs/core/Cargo.toml
+@@ -124,6 +124,10 @@ whoami = { workspace = true }
+ [target.x86_64-unknown-linux-musl.dependencies]
+ openssl-sys = { workspace = true, features = ["vendored"] }
+ 
++# Build OpenSSL from source for riscv64 builds.
++[target.riscv64gc-unknown-linux-gnu.dependencies]
++openssl-sys = { workspace = true, features = ["vendored"] }
++
+ # Build OpenSSL from source for musl builds.
+ [target.aarch64-unknown-linux-musl.dependencies]
+ openssl-sys = { workspace = true, features = ["vendored"] }
+diff --git a/codex-rs/linux-sandbox/build.rs b/codex-rs/linux-sandbox/build.rs
+index a2b4ca86ca..5ebdc80e36 100644
+--- a/codex-rs/linux-sandbox/build.rs
++++ b/codex-rs/linux-sandbox/build.rs
+@@ -37,6 +37,14 @@ fn main() {
+     }
+ 
+     if let Err(err) = try_build_vendored_bwrap() {
++        let host = env::var("HOST").unwrap_or_default();
++        let target = env::var("TARGET").unwrap_or_default();
++        if host != target {
++            println!(
++                "cargo:warning=skipping vendored bubblewrap for cross-compiled target {target}: {err}"
++            );
++            return;
++        }
+         panic!("failed to compile vendored bubblewrap for Linux target: {err}");
+     }
+ }
+diff --git a/codex-rs/linux-sandbox/src/landlock.rs b/codex-rs/linux-sandbox/src/landlock.rs
+index 3f95224ab6..bd63c395d7 100644
+--- a/codex-rs/linux-sandbox/src/landlock.rs
++++ b/codex-rs/linux-sandbox/src/landlock.rs
+@@ -254,6 +254,8 @@ fn install_network_seccomp_filter_on_current_thread(
+             TargetArch::x86_64
+         } else if cfg!(target_arch = "aarch64") {
+             TargetArch::aarch64
++        } else if cfg!(target_arch = "riscv64") {
++            TargetArch::riscv64
+         } else {
+             unimplemented!("unsupported architecture for seccomp filter");
+         },
