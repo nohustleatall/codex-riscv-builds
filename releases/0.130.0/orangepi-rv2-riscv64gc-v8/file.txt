@@ -1,0 +1,1 @@
+codex-0.130.0-orangepi-rv2-riscv64gc-v8: ELF 64-bit LSB pie executable, UCB RISC-V, RVC, double-float ABI, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux-riscv64-lp64d.so.1, BuildID[sha1]=8014ea03b4f31aa84f8ce961f17ff286f4630f8a, for GNU/Linux 4.15.0, stripped

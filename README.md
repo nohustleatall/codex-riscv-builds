@@ -8,20 +8,20 @@ The current focus is the Orange Pi RV2 / SpacemiT K1 class of boards using the `
 
 | Version | Target | Notes |
 | --- | --- | --- |
-| 0.128.0 | Orange Pi RV2 / `riscv64gc-unknown-linux-gnu` | V8-enabled build with RISC-V seccomp support |
+| 0.130.0 | Orange Pi RV2 / `riscv64gc-unknown-linux-gnu` | V8-enabled build with RISC-V seccomp support |
 
 Large binaries are published as GitHub Release assets, not committed to this repository.
 
 ## Verify a downloaded binary
 
 ```sh
-sha256sum codex-0.128.0-orangepi-rv2-riscv64gc-v8
-chmod +x codex-0.128.0-orangepi-rv2-riscv64gc-v8
-./codex-0.128.0-orangepi-rv2-riscv64gc-v8 --version
+sha256sum codex-0.130.0-orangepi-rv2-riscv64gc-v8
+chmod +x codex-0.130.0-orangepi-rv2-riscv64gc-v8
+./codex-0.130.0-orangepi-rv2-riscv64gc-v8 --version
 ```
 
 Expected version:
 
 ```text
-codex-cli 0.128.0
+codex-cli 0.130.0
 ```
